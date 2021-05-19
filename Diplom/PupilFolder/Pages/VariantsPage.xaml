@@ -1,0 +1,56 @@
+﻿<Page x:Class="Diplom.VariantsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Diplom"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Выбор варианта">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <MenuItem Header="Выход" Name="LogoutBtn" Click="LogoutBtn_Click"/>
+            
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Ученик:" Margin="5, 0"/>
+                <TextBlock Name="PupilNameTB"/>
+                <TextBlock Text="Класс:" Margin="5, 0"/>
+                <TextBlock Name="PupilClassTB"/>
+            </StackPanel>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Name="VariantsDG" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Вариант" Binding="{Binding VariantTitle}" Width="Auto"/>
+                    <DataGridTemplateColumn Header="Начать решение" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <UniformGrid Columns="2">
+                                    <Button Content="Подготовка" Background="LimeGreen" Name="TrainingBtn" Click="TrainingBtn_Click"/>
+                                    <Button Content="Контрольная" Background="Yellow" Name="ControlBtn" Click="ControlBtn_Click"/>
+                                </UniformGrid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="1" Name="PupilsVariantsDG" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Вариант" Binding="{Binding Variant.VariantTitle}" Width="Auto"/>
+                    <DataGridTextColumn Header="Результат" Binding="{Binding Result}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        
+    </Grid>
+</Page>

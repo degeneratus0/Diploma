@@ -1,0 +1,97 @@
+﻿<Page x:Class="Diplom.PupilFolder.Pages.ResultsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Diplom.PupilFolder.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ResultsPage">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="ResultsSP">
+                
+                <StackPanel Name="ResultTask13">
+                    <StackPanel Name="Task13CriteriasSP">
+                        <Expander Header="Критерии оценивания задания 13">
+                            <TabControl>
+                                <TabItem Header="Критерии оценивания задания 13.1">
+                                    <Image Source="pack://application:,,,/Resources/Task13_1Criterias.jpg"/>
+                                </TabItem>
+                                <TabItem Header="Критерии оценивания задания 13.2">
+                                    <Image Source="pack://application:,,,/Resources/Task13_2Criterias.jpg"/>
+                                </TabItem>
+                            </TabControl>
+                        </Expander>
+                    </StackPanel>
+                    <Expander Header="Задание 13">
+                        <StackPanel Name="Task13ContentSP"/>
+                    </Expander>
+                    <StackPanel Orientation="Horizontal" Name="Eval13SP">
+                        <TextBlock Text="Ваша оценка:" Margin="5, 0"/>
+                        <RadioButton Content="0" Margin="5, 0" Checked="RadioButtons13_Checked"/>
+                        <RadioButton Content="1" Margin="5, 0" Checked="RadioButtons13_Checked"/>
+                        <RadioButton Content="2" Margin="5, 0" Checked="RadioButtons13_Checked"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                
+                <StackPanel Name="ResultTask14">
+                    <StackPanel Name="Task14CriteriasSP">
+                        <Expander Header="Критерии оценивания задания 14">
+                            <Image Source="pack://application:,,,/Resources/Task14Criterias.jpg"/>
+                        </Expander>
+                    </StackPanel>
+                    <Expander Header="Задание 14">
+                        <StackPanel Name="Task14ContentSP"/>
+                    </Expander>
+                    <StackPanel Orientation="Horizontal" Name="Eval14SP">
+                        <TextBlock Text="Ваша оценка:" Margin="5, 0"/>
+                        <RadioButton Content="0" Margin="5, 0" Checked="RadioButtons14_Checked"/>
+                        <RadioButton Content="1" Margin="5, 0" Checked="RadioButtons14_Checked"/>
+                        <RadioButton Content="2" Margin="5, 0" Checked="RadioButtons14_Checked"/>
+                        <RadioButton Content="3" Margin="5, 0" Checked="RadioButtons14_Checked"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                
+                <StackPanel Name="ResultTask15">
+                    <StackPanel Name="Task15CriteriasSP">
+                        <Expander Header="Критерии оценивания задания 15">
+                            <TabControl>
+                                <TabItem Header="Критерии оценивания задания 15.1">
+                                    <Image Source="pack://application:,,,/Resources/Task15_1Criterias.jpg"/>
+                                </TabItem>
+                                <TabItem Header="Критерии оценивания задания 15.2">
+                                    <Image Source="pack://application:,,,/Resources/Task15_2Criterias.jpg"/>
+                                </TabItem>
+                            </TabControl>
+                        </Expander>
+                    </StackPanel>                    
+                    <Expander Header="Задание 15">
+                        <StackPanel Name="Task15ContentSP"/>
+                    </Expander>
+                    <StackPanel Orientation="Horizontal" Name="Eval15SP">
+                        <TextBlock Text="Ваша оценка:" Margin="5, 0"/>
+                        <RadioButton Content="0" Margin="5, 0" Checked="RadioButtons15_Checked"/>
+                        <RadioButton Content="1" Margin="5, 0" Checked="RadioButtons15_Checked"/>
+                        <RadioButton Content="2" Margin="5, 0" Checked="RadioButtons15_Checked"/>
+                    </StackPanel>
+                </StackPanel>
+                
+            </StackPanel>
+        </ScrollViewer>
+        <DockPanel Grid.Row="1">            
+            <Button DockPanel.Dock="Right" Padding="10, 0" Content="Завершить оценку" Name="EndEvalBtn" Click="EndEvalBtn_Click"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Итоговое количество баллов: "/>
+                <TextBlock FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Name="OverallPoints"/>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Page>

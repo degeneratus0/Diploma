@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PupilsVariantsDataSet" targetNamespace="http://tempuri.org/PupilsVariantsDataSet.xsd" xmlns:mstns="http://tempuri.org/PupilsVariantsDataSet.xsd" xmlns="http://tempuri.org/PupilsVariantsDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=DEGENERATUS0-PC;Initial Catalog=DiplomDB;Integrated Security=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="degeneratus0-pc.DiplomDB.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PupilsVariantsDataTableTableAdapter" GeneratorDataComponentClassName="PupilsVariantsDataTableTableAdapter" Name="PupilsVariantsDataTable" UserDataComponentName="PupilsVariantsDataTableTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="degeneratus0-pc.DiplomDB.dbo" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        Classes.Title, Users.FullName, Variants.VariantTitle, PupilsVariants.Result
+FROM            Classes INNER JOIN
+                         Pupils ON Classes.ID = Pupils.ClassId INNER JOIN
+                         Users ON Pupils.UserId = Users.ID INNER JOIN
+                         PupilsVariants ON Pupils.ID = PupilsVariants.PupilId INNER JOIN
+                         Variants ON PupilsVariants.VariantId = Variants.ID</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Title" DataSetColumn="Title" />
+              <Mapping SourceColumn="FullName" DataSetColumn="FullName" />
+              <Mapping SourceColumn="VariantTitle" DataSetColumn="VariantTitle" />
+              <Mapping SourceColumn="Result" DataSetColumn="Result" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PupilsVariantsDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PupilsVariantsDataSet" msprop:Generator_UserDSName="PupilsVariantsDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PupilsVariantsDataTable" msprop:Generator_TableClassName="PupilsVariantsDataTableDataTable" msprop:Generator_TableVarName="tablePupilsVariantsDataTable" msprop:Generator_RowChangedName="PupilsVariantsDataTableRowChanged" msprop:Generator_TablePropName="PupilsVariantsDataTable" msprop:Generator_RowDeletingName="PupilsVariantsDataTableRowDeleting" msprop:Generator_RowChangingName="PupilsVariantsDataTableRowChanging" msprop:Generator_RowEvHandlerName="PupilsVariantsDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="PupilsVariantsDataTableRowDeleted" msprop:Generator_RowClassName="PupilsVariantsDataTableRow" msprop:Generator_UserTableName="PupilsVariantsDataTable" msprop:Generator_RowEvArgName="PupilsVariantsDataTableRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_ColumnPropNameInTable="TitleColumn" msprop:Generator_UserColumnName="Title">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FullName" msprop:Generator_ColumnVarNameInTable="columnFullName" msprop:Generator_ColumnPropNameInRow="FullName" msprop:Generator_ColumnPropNameInTable="FullNameColumn" msprop:Generator_UserColumnName="FullName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="VariantTitle" msprop:Generator_ColumnVarNameInTable="columnVariantTitle" msprop:Generator_ColumnPropNameInRow="VariantTitle" msprop:Generator_ColumnPropNameInTable="VariantTitleColumn" msprop:Generator_UserColumnName="VariantTitle">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Result" msprop:Generator_ColumnVarNameInTable="columnResult" msprop:Generator_ColumnPropNameInRow="Result" msprop:Generator_ColumnPropNameInTable="ResultColumn" msprop:Generator_UserColumnName="Result" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

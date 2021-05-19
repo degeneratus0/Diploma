@@ -1,0 +1,33 @@
+﻿<Window x:Class="Diplom.TeacherFolder.AddEditTeacherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Diplom.TeacherFolder"
+        mc:Ignorable="d"
+        Title="Добавление учителя" Height="125" Width="250" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="0, 5" Name="TeacherSP">
+            <UniformGrid Columns="2">
+                <TextBlock Text="Логин:" HorizontalAlignment="Right"/>
+                <TextBox Text="{Binding Login}"/>
+            </UniformGrid>
+            <UniformGrid Columns="2">
+                <TextBlock Text="Пароль:" HorizontalAlignment="Right"/>
+                <TextBox Text="{Binding Password}"/>
+            </UniformGrid>
+            <UniformGrid Columns="2">
+                <TextBlock Text="ФИО:" HorizontalAlignment="Right"/>
+                <TextBox Text="{Binding FullName}"/>
+            </UniformGrid>
+        </StackPanel>
+        <UniformGrid Columns="2" Grid.Row="2">
+            <Button Content="Сохранить" Name="SaveBtn" Click="SaveBtn_Click"/>
+            <Button Content="Отмена" Name="CancelBtn" Click="CancelBtn_Click"/>
+        </UniformGrid>
+    </Grid>
+</Window>

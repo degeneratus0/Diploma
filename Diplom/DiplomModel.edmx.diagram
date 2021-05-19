@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5597a8b81cdf427392cb4289e180285e" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="DiplomDBModel.Class" Width="1.5" PointX="8.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomDBModel.Pupil" Width="1.5" PointX="6.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomDBModel.PupilsVariant" Width="1.5" PointX="6.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomDBModel.Role" Width="1.5" PointX="10.625" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomDBModel.TaskNumber" Width="1.5" PointX="1" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomDBModel.Task" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomDBModel.TasksVariant" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomDBModel.TaskType" Width="1.5" PointX="1" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomDBModel.User" Width="1.5" PointX="8.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomDBModel.Variant" Width="1.5" PointX="4.875" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="DiplomDBModel.FK_Pupils_Classes" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomDBModel.FK_PupilsVariants_Pupils" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomDBModel.FK_PupilsVariants_Variants" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomDBModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomDBModel.FK_Tasks_TaskNumbers" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomDBModel.FK_Tasks_TaskTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomDBModel.FK_TasksVariants_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomDBModel.FK_TasksVariants_Variants" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DiplomDBModel.TaskImage" Width="1.5" PointX="4.875" PointY="2.375" />
+        <AssociationConnector Association="DiplomDBModel.FK_TaskImages_Tasks" />
+        <AssociationConnector Association="DiplomDBModel.FK_Pupils_Users" />
+        <EntityTypeShape EntityType="DiplomDBModel.TaskFile" Width="1.5" PointX="4.875" PointY="0.5" />
+        <AssociationConnector Association="DiplomDBModel.FK_TaskFiles_Tasks" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

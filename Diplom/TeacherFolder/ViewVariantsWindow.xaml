@@ -1,0 +1,68 @@
+﻿<Window x:Class="Diplom.TeacherFolder.ViewVariantsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Diplom.TeacherFolder"
+        mc:Ignorable="d"
+        Title="Просмотр вариантов" Height="500" Width="800" MinHeight="500" MinWidth="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.12*"/>
+                <ColumnDefinition Width="0.05*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Name="VariantsDG" AutoGenerateColumns="False" SelectedIndex="0" SelectionChanged="VariantsDG_SelectionChanged" AddingNewItem="VariantsDG_AddingNewItem">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Вариант" Binding="{Binding VariantTitle}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <DataGrid Name="TasksDG" Grid.Column="1" AutoGenerateColumns="False" SelectedIndex="0" SelectionChanged="TasksDG_SelectionChanged" AddingNewItem="TasksDG_AddingNewItem" PreviewKeyDown="TasksDG_PreviewKeyDown">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="№" Binding="{Binding TaskNumber.Number}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <GroupBox Grid.Column="2" Header="Подробнее">
+                <DockPanel>
+                    <UniformGrid Columns="1" Height="20" DockPanel.Dock="Bottom">
+                        <Button Content="Сохранить" Name="SaveBtn" Click="SaveBtn_Click"/>
+                    </UniformGrid>
+                    <StackPanel Name="TaskSP">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Left" Text="Тип задания: " VerticalAlignment="Center"/>
+                            <ComboBox Name="TaskTypeCB" DisplayMemberPath="Type" SelectedItem="{Binding TaskType}" SelectionChanged="TaskTypeCB_SelectionChanged"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Left" Text="Тема задания: " VerticalAlignment="Center"/>
+                            <ComboBox Name="TaskNumberCB" DisplayMemberPath="Description" SelectedItem="{Binding TaskNumber}"/>
+                        </DockPanel>
+                        <TextBlock Text="Описание:"/>
+                        <TextBox Height="100" TextWrapping="Wrap" MaxLines="50" VerticalScrollBarVisibility="Auto" Text="{Binding Description}" AcceptsReturn="True" AcceptsTab="True"/>
+                        <TextBlock Text="Решение:"/>
+                        <TextBox Height="100" TextWrapping="Wrap" MaxLines="50" VerticalScrollBarVisibility="Auto" Text="{Binding Solution}" AcceptsReturn="True" AcceptsTab="True"/>
+                        <StackPanel Name="AnswerSPContainer">
+                            <StackPanel Name="AnswerSP">
+                                <TextBlock Text="Ответ:"/>
+                                <TextBox Text="{Binding Answer}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <UniformGrid Columns="4" Margin="0, 5">
+                            <Button Content="Добавить картинку" Name="AddImageBtn"  Click="AddImage"/>
+                            <Button Content="Добавить файл" Name="AddFileBtn" Click="AddFileBtn_Click"/>
+                            <Button Content="Удалить файл" Name="DeleteFileBtn" Click="DeleteFileBtn_Click"/>
+                            <TextBlock HorizontalAlignment="Center">
+                                <Hyperlink Name="FileHyperlink" Click="FileHyperlink_Click"/>
+                            </TextBlock>
+                        </UniformGrid>
+                        <StackPanel Name="ImagesSP" Orientation="Horizontal" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </DockPanel>
+            </GroupBox>
+                    
+        </Grid>
+    </Grid>
+</Window>

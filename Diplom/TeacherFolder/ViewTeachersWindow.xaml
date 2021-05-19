@@ -1,0 +1,30 @@
+﻿<Window x:Class="Diplom.TeacherFolder.ViewTeachersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Diplom.TeacherFolder"
+        mc:Ignorable="d"
+        Title="Учителя" Height="300" Width="400" MinHeight="300" MinWidth="400" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="Учителя">
+                <MenuItem Header="Добавить" Click="AddTeacher_Click"/>
+                <MenuItem Header="Редактировать" Click="EditTeacher_Click"/>
+                <MenuItem Header="Удалить" Click="DeleteTeacher_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <DataGrid Grid.Row="1" Name="TeachersDG" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="*"/>
+                <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="0.5*"/>
+                <DataGridTextColumn Header="Пароль" Binding="{Binding Password}" Width="0.5*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

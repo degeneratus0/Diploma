@@ -1,0 +1,766 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DiplomDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pupils">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PupilsVariants">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PupilId" Type="int" Nullable="false" />
+          <Property Name="VariantId" Type="int" Nullable="false" />
+          <Property Name="Completed" Type="bit" />
+          <Property Name="Result" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskFiles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskImages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="image" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskNumbers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskNumberId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Solution" Type="nvarchar(max)" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaskTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TasksVariants">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VariantId" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Variants">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VariantTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Pupils_Classes">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="Pupils" Type="Self.Pupils" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pupils">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pupils_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pupils" Type="Self.Pupils" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pupils">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PupilsVariants_Pupils">
+          <End Role="Pupils" Type="Self.Pupils" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PupilsVariants" Type="Self.PupilsVariants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pupils">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PupilsVariants">
+              <PropertyRef Name="PupilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PupilsVariants_Variants">
+          <End Role="Variants" Type="Self.Variants" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PupilsVariants" Type="Self.PupilsVariants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Variants">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PupilsVariants">
+              <PropertyRef Name="VariantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskFiles_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskFiles" Type="Self.TaskFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskFiles">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskImages_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="TaskImages" Type="Self.TaskImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskImages">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_TaskNumbers">
+          <End Role="TaskNumbers" Type="Self.TaskNumbers" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskNumbers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="TaskNumberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_TaskTypes">
+          <End Role="TaskTypes" Type="Self.TaskTypes" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="TaskTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TasksVariants_Tasks">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TasksVariants" Type="Self.TasksVariants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TasksVariants">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TasksVariants_Variants">
+          <End Role="Variants" Type="Self.Variants" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TasksVariants" Type="Self.TasksVariants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Variants">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TasksVariants">
+              <PropertyRef Name="VariantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DiplomDBModelStoreContainer">
+          <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pupils" EntityType="Self.Pupils" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PupilsVariants" EntityType="Self.PupilsVariants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskFiles" EntityType="Self.TaskFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskImages" EntityType="Self.TaskImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskNumbers" EntityType="Self.TaskNumbers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TasksVariants" EntityType="Self.TasksVariants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskTypes" EntityType="Self.TaskTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Variants" EntityType="Self.Variants" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Pupils_Classes" Association="Self.FK_Pupils_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Pupils" EntitySet="Pupils" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pupils_Users" Association="Self.FK_Pupils_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Pupils" EntitySet="Pupils" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PupilsVariants_Pupils" Association="Self.FK_PupilsVariants_Pupils">
+            <End Role="Pupils" EntitySet="Pupils" />
+            <End Role="PupilsVariants" EntitySet="PupilsVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PupilsVariants_Variants" Association="Self.FK_PupilsVariants_Variants">
+            <End Role="Variants" EntitySet="Variants" />
+            <End Role="PupilsVariants" EntitySet="PupilsVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskFiles_Tasks" Association="Self.FK_TaskFiles_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskFiles" EntitySet="TaskFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskImages_Tasks" Association="Self.FK_TaskImages_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TaskImages" EntitySet="TaskImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_TaskNumbers" Association="Self.FK_Tasks_TaskNumbers">
+            <End Role="TaskNumbers" EntitySet="TaskNumbers" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_TaskTypes" Association="Self.FK_Tasks_TaskTypes">
+            <End Role="TaskTypes" EntitySet="TaskTypes" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TasksVariants_Tasks" Association="Self.FK_TasksVariants_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TasksVariants" EntitySet="TasksVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TasksVariants_Variants" Association="Self.FK_TasksVariants_Variants">
+            <End Role="Variants" EntitySet="Variants" />
+            <End Role="TasksVariants" EntitySet="TasksVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DiplomDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Pupils" Relationship="Self.FK_Pupils_Classes" FromRole="Classes" ToRole="Pupils" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Pupil">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Class" Relationship="Self.FK_Pupils_Classes" FromRole="Pupils" ToRole="Classes" />
+          <NavigationProperty Name="PupilsVariants" Relationship="Self.FK_PupilsVariants_Pupils" FromRole="Pupils" ToRole="PupilsVariants" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="DiplomDBModel.FK_Pupils_Users" FromRole="Pupil" ToRole="User" />
+        </EntityType>
+        <EntityType Name="PupilsVariant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PupilId" Type="Int32" Nullable="false" />
+          <Property Name="VariantId" Type="Int32" Nullable="false" />
+          <Property Name="Completed" Type="Boolean" />
+          <Property Name="Result" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pupil" Relationship="Self.FK_PupilsVariants_Pupils" FromRole="PupilsVariants" ToRole="Pupils" />
+          <NavigationProperty Name="Variant" Relationship="Self.FK_PupilsVariants_Variants" FromRole="PupilsVariants" ToRole="Variants" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TaskNumber">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_TaskNumbers" FromRole="TaskNumbers" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskNumberId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Solution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaskTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TaskNumber" Relationship="Self.FK_Tasks_TaskNumbers" FromRole="Tasks" ToRole="TaskNumbers" />
+          <NavigationProperty Name="TaskType" Relationship="Self.FK_Tasks_TaskTypes" FromRole="Tasks" ToRole="TaskTypes" />
+          <NavigationProperty Name="TasksVariants" Relationship="Self.FK_TasksVariants_Tasks" FromRole="Tasks" ToRole="TasksVariants" />
+          <NavigationProperty Name="TaskImages" Relationship="DiplomDBModel.FK_TaskImages_Tasks" FromRole="Task" ToRole="TaskImage" />
+          <NavigationProperty Name="TaskFiles" Relationship="DiplomDBModel.FK_TaskFiles_Tasks" FromRole="Task" ToRole="TaskFile" />
+        </EntityType>
+        <EntityType Name="TasksVariant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VariantId" Type="Int32" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_TasksVariants_Tasks" FromRole="TasksVariants" ToRole="Tasks" />
+          <NavigationProperty Name="Variant" Relationship="Self.FK_TasksVariants_Variants" FromRole="TasksVariants" ToRole="Variants" />
+        </EntityType>
+        <EntityType Name="TaskType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_TaskTypes" FromRole="TaskTypes" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Pupils" Relationship="DiplomDBModel.FK_Pupils_Users" FromRole="User" ToRole="Pupil" />
+        </EntityType>
+        <EntityType Name="Variant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VariantTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PupilsVariants" Relationship="Self.FK_PupilsVariants_Variants" FromRole="Variants" ToRole="PupilsVariants" />
+          <NavigationProperty Name="TasksVariants" Relationship="Self.FK_TasksVariants_Variants" FromRole="Variants" ToRole="TasksVariants" />
+        </EntityType>
+        <Association Name="FK_Pupils_Classes">
+          <End Role="Classes" Type="Self.Class" Multiplicity="1" />
+          <End Role="Pupils" Type="Self.Pupil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pupils">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PupilsVariants_Pupils">
+          <End Role="Pupils" Type="Self.Pupil" Multiplicity="1" />
+          <End Role="PupilsVariants" Type="Self.PupilsVariant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pupils">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PupilsVariants">
+              <PropertyRef Name="PupilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PupilsVariants_Variants">
+          <End Role="Variants" Type="Self.Variant" Multiplicity="1" />
+          <End Role="PupilsVariants" Type="Self.PupilsVariant" Multiplicity="*" >
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="Variants">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PupilsVariants">
+              <PropertyRef Name="VariantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_TaskNumbers">
+          <End Role="TaskNumbers" Type="Self.TaskNumber" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskNumbers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="TaskNumberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_TaskTypes">
+          <End Role="TaskTypes" Type="Self.TaskType" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="TaskTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TasksVariants_Tasks">
+          <End Role="Tasks" Type="Self.Task" Multiplicity="1" />
+          <End Role="TasksVariants" Type="Self.TasksVariant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TasksVariants">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TasksVariants_Variants">
+          <End Role="Variants" Type="Self.Variant" Multiplicity="1" />
+          <End Role="TasksVariants" Type="Self.TasksVariant" Multiplicity="*" >
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="Variants">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TasksVariants">
+              <PropertyRef Name="VariantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DiplomEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="Pupils" EntityType="Self.Pupil" />
+          <EntitySet Name="PupilsVariants" EntityType="Self.PupilsVariant" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="TaskNumbers" EntityType="Self.TaskNumber" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="TasksVariants" EntityType="Self.TasksVariant" />
+          <EntitySet Name="TaskTypes" EntityType="Self.TaskType" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Variants" EntityType="Self.Variant" />
+          <AssociationSet Name="FK_Pupils_Classes" Association="Self.FK_Pupils_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Pupils" EntitySet="Pupils" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PupilsVariants_Pupils" Association="Self.FK_PupilsVariants_Pupils">
+            <End Role="Pupils" EntitySet="Pupils" />
+            <End Role="PupilsVariants" EntitySet="PupilsVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PupilsVariants_Variants" Association="Self.FK_PupilsVariants_Variants">
+            <End Role="Variants" EntitySet="Variants" />
+            <End Role="PupilsVariants" EntitySet="PupilsVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_TaskNumbers" Association="Self.FK_Tasks_TaskNumbers">
+            <End Role="TaskNumbers" EntitySet="TaskNumbers" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_TaskTypes" Association="Self.FK_Tasks_TaskTypes">
+            <End Role="TaskTypes" EntitySet="TaskTypes" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TasksVariants_Tasks" Association="Self.FK_TasksVariants_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="TasksVariants" EntitySet="TasksVariants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TasksVariants_Variants" Association="Self.FK_TasksVariants_Variants">
+            <End Role="Variants" EntitySet="Variants" />
+            <End Role="TasksVariants" EntitySet="TasksVariants" />
+          </AssociationSet>
+          <EntitySet Name="TaskImages" EntityType="DiplomDBModel.TaskImage" />
+          <AssociationSet Name="FK_TaskImages_Tasks" Association="DiplomDBModel.FK_TaskImages_Tasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TaskImage" EntitySet="TaskImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pupils_Users" Association="DiplomDBModel.FK_Pupils_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Pupil" EntitySet="Pupils" />
+          </AssociationSet>
+          <EntitySet Name="TaskFiles" EntityType="DiplomDBModel.TaskFile" />
+          <AssociationSet Name="FK_TaskFiles_Tasks" Association="DiplomDBModel.FK_TaskFiles_Tasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TaskFile" EntitySet="TaskFiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TaskImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="DiplomDBModel.FK_TaskImages_Tasks" FromRole="TaskImage" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_TaskImages_Tasks">
+          <End Type="DiplomDBModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="DiplomDBModel.TaskImage" Role="TaskImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskImage">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pupils_Users">
+          <End Type="DiplomDBModel.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DiplomDBModel.Pupil" Role="Pupil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pupil">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TaskFile">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="DiplomDBModel.FK_TaskFiles_Tasks" FromRole="TaskFile" ToRole="Task" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_TaskFiles_Tasks">
+          <End Type="DiplomDBModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="DiplomDBModel.TaskFile" Role="TaskFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskFile">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DiplomDBModelStoreContainer" CdmEntityContainer="DiplomEntities">
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="DiplomDBModel.Class">
+              <MappingFragment StoreEntitySet="Classes">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pupils">
+            <EntityTypeMapping TypeName="DiplomDBModel.Pupil">
+              <MappingFragment StoreEntitySet="Pupils">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PupilsVariants">
+            <EntityTypeMapping TypeName="DiplomDBModel.PupilsVariant">
+              <MappingFragment StoreEntitySet="PupilsVariants">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PupilId" ColumnName="PupilId" />
+                <ScalarProperty Name="VariantId" ColumnName="VariantId" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DiplomDBModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskNumbers">
+            <EntityTypeMapping TypeName="DiplomDBModel.TaskNumber">
+              <MappingFragment StoreEntitySet="TaskNumbers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="DiplomDBModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TaskNumberId" ColumnName="TaskNumberId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Solution" ColumnName="Solution" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="TaskTypeId" ColumnName="TaskTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TasksVariants">
+            <EntityTypeMapping TypeName="DiplomDBModel.TasksVariant">
+              <MappingFragment StoreEntitySet="TasksVariants">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VariantId" ColumnName="VariantId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskTypes">
+            <EntityTypeMapping TypeName="DiplomDBModel.TaskType">
+              <MappingFragment StoreEntitySet="TaskTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DiplomDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Variants">
+            <EntityTypeMapping TypeName="DiplomDBModel.Variant">
+              <MappingFragment StoreEntitySet="Variants">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VariantTitle" ColumnName="VariantTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskImages">
+            <EntityTypeMapping TypeName="DiplomDBModel.TaskImage">
+              <MappingFragment StoreEntitySet="TaskImages">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskFiles">
+            <EntityTypeMapping TypeName="DiplomDBModel.TaskFile">
+              <MappingFragment StoreEntitySet="TaskFiles">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
